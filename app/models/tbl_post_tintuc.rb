@@ -1,0 +1,2 @@
+class TblPostTintuc < ApplicationRecord
+end

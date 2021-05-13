@@ -1,0 +1,2 @@
+class TblPostDichvu < ApplicationRecord
+end

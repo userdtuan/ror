@@ -1,0 +1,42 @@
+	<section>
+
+        <div class="dich-vu">
+            <div class="top-dich-vu">
+                <ul>
+                    <li>Trang chủ</li>
+                    <li><i class="fas fa-chevron-right"></i></li>
+                    <li>dịch vụ</li>
+                </ul>
+            </div>
+            <div class="bottom-dich-vu">
+                
+                <div class="left-dich-vu">
+                    <div class="title-ldva">
+                        <h1 class="ldv-title">Danh sách dịch vụ</h1>
+                    </div>
+<% @projects.each do |post| %>
+                    <div class="line-block-dv clearfix">
+                        <a href="/dich-vu/<%= post.slug %>" class="img">
+                            <img src="/uploads/PostsNewsImg/<%=post.img%>">
+                        </a>
+                        <div class="title-block-dv">
+                            <h2 class="title">
+                                <a href="/dich-vu/<%= post.slug %>"><%= post.title %></a>
+                            </h2>
+                            <time>Thu bay</time>
+                            <div class="simpleconten">
+                                <%= post.desc %>
+                            </div>
+                            <a href="/dich-vu/<%= post.slug %>" class="more">Xem chi tiết</a>
+                        </div>
+                    </div>
+<% end %>
+
+                    </div>	
+
+                </div>
+            </div>
+        </div>
+		
+	</section>
+	

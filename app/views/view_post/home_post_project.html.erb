@@ -1,0 +1,69 @@
+<%
+=begin%>
+ @extends('views_posts.posts_all')
+@section('home_posts_content') 
+<%
+=end%>
+	<div class="top-du-an">
+		<ul>
+			<li>TRANG CHỦ</li>
+			<li><i class="fas fa-chevron-right"></i></li>
+			<li>THÔNG TIN <%=@post.title%></li>
+		</ul>
+	</div>
+	<div class="bottom-du-an">
+		<div class="block-du-an">
+			<div class="title-block-du-an">
+				<h3>Chi tiết dự án</h3>
+			</div>
+			<div class="content-block-du-an">
+				<%
+=begin%>
+ @if($post_project->post_project_status == 1) 
+<%
+=end%>
+                
+					<img class="embed-responsive" alt="IMG Description" src="/uploads/PostsProjectImg/1.jpg">
+					<%=raw @post.content%>
+					
+                
+				<%
+                
+=begin%>
+ @endif 
+<%
+=end%>
+			</div>
+		</div>
+		<div class="right-hien-thi">
+			<div class="right-danh-muc">
+				<h2 class="i-title">Danh mục</h2>
+				<ul>
+					<li><a href="{{URL::TO('/gioi-thieu')}}" title="">Giới thiệu</a>
+					</li>
+					<li><a href="{{URL::TO('/kinh-nghiem-nang-luc')}}" title="">Kinh nghiệm năng lực</a>
+					</li>
+					<li><a href="{{URL::TO('/danh-sach-dich-vu')}}" title="">Dịch vụ</a>
+					</li>
+					<li><a href="{{URL::TO('/danh-sach-tin-tuc')}}" title="">Tin tức</a>
+					</li>
+					<li><a href="{{URL::TO('/home')}}#Project" title="">Dự án</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="right-danh-muc">
+				<h2 class="i-title">Tin tức</h2>
+				<% @postall.each do |post| %>
+				<div class="rg-post clearfix">
+					<a href="#" class="img">
+						<img class="embed-responsive" alt="IMG Description" src="/uploads/PostsNewsImg/<%= post.img %>">
+					</a>
+					<h3 class="title">
+						<a href="/tin-tuc/<%= post.slug %>"><%= post.title %></a>
+					</h3>
+				</div>
+				<% end %>
+			</div>	
+		</div>
+	</div>

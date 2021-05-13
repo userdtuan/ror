@@ -1,0 +1,2 @@
+class TblCategoryNews < ApplicationRecord
+end

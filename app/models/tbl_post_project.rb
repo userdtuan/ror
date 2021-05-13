@@ -1,0 +1,2 @@
+class TblPostProject < ApplicationRecord
+end

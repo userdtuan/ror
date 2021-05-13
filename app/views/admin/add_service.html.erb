@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Admin | GreenService</title>
+
+    <!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../testChuyende/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+   <link href="../testChuyende/green.css" rel="stylesheet">
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- Custom Theme Style -->
+    <link href="../testChuyende/custom-min.css" rel="stylesheet">
+  </head>
+
+  <body class="nav-md" style="background:#2A3F54">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="{{URL::TO('/admin-dashboard')}}" class="site_title"><span>GreenService!</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_info">
+                <span style="font-size:18px"> Admin </br><%= " #{current_user.name}" %></span>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>General</h3>
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> Trang chủ <span class="fa fa-chevron-down"></span></a>
+                  </li>
+                  <li><a href="/news/manage"><i class="fa fa-tags"></i> Quản lý Dịch Vụ</a>
+                  </li>
+                  <li><a href="/admin"><i class="fa fa-edit"></i> Quản lý dự án</a>
+
+                  </li>
+                  <li><a href="/service/manage"><i class="fa fa-desktop"></i>Quản lý dịch vụ </a>
+
+                  </li>
+                </ul>
+              </div>
+              <div class="menu_section">
+                <h3>Live On</h3>
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-bug"></i> Trang bổ sung <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{{URL::TO('/profile-admin')}}">Hồ sơ</a></li>
+                      <li><a href="{{URL::TO('403')}}">403 Error</a></li>
+                      <li><a href="{{URL::TO('404')}}">404 Error</a></li>
+                      <li><a href="{{URL::TO('500')}}">500 Error</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+            <!-- /sidebar menu -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+            <div class="nav_menu">
+                
+                <nav class="nav navbar-nav">
+                <ul class=" navbar-right">
+                  <li class="nav-item dropdown open" style="padding-left: 15px;">
+                    <%= link_to 'Log Out', login_path %>
+                    
+                  </li>
+  
+                  
+                </ul>
+              </nav>
+            </div>
+          </div>
+        <!-- /top navigation -->
+
+        <div class="right_col" role="main">
+            <div class="">
+          <div class="page-title">
+            <div class="title_left">
+              <h3>Thêm bài viết về Dịch Vụ</h3>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Bài viết <small>Dịch Vụ</small></h2>
+                  
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <br />
+
+
+<%
+=begin%>
+ <form id="demo-form2" action="{{URL::TO('/save-posts-project')}}" enctype="multipart/form-data" method="post" data-parsley-validate class="form-horizontal form-label-left">
+                    {{ csrf_field() }}
+                    <div class="item form-group">
+                      <label class="col-form-label col-md-3 col-sm-3 label-align" for="Name">Tên nội dung Dịch Vụ <span class="required">*</span>
+                      </label>
+                      <div class="col-md-9 col-sm-9 ">
+                        <input type="text" id="slug" onkeyup="ChangeToSlug()" name="project_post_title" required="required" class="form-control ">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="col-form-label col-md-3 col-sm-3 label-align" for="slug">Slug <span class="required">*</span>
+                      </label>
+                      <div class="col-md-9 col-sm-9 ">
+                        <input type="text" id="convert_slug" name="project_post_slug" required="required" class="form-control ">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 label-align">Tóm tắt Dịch Vụ <span class="required">*</span>
+                      </label>
+                      <div class="col-md-9 col-sm-9 ">
+                        <textarea class="form-control" rows="3" name="project_post_desc" placeholder="" required=""></textarea>
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 label-align" for="exampleInputImage1">Hình ảnh Dịch Vụ</label>
+                        <input type="file" name="project_post_img" class="form-control" id="exampleInputImage1" required="" style="border: none;">
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 label-align">Nội dung Dịch Vụ <span class="required">*</span>
+                      </label>
+                      <div class="col-md-9 col-sm-9 ">
+                        <textarea name="editor1" rows="5"></textarea>
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="col-form-label col-md-3 col-sm-3 label-align" for="keyword">Meta từ khóa Dịch Vụ <span class="required">*</span>
+                      </label>
+                      <div class="col-md-9 col-sm-9 ">
+                        <input type="text" name="project_post_metakeyword" required="required" class="form-control ">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 label-align">Meta nội dung Dịch Vụ <span class="required">*</span>
+                      </label>
+                      <div class="col-md-9 col-sm-9 ">
+                        <textarea class="form-control" rows="5" name="project_post_metadesc" required="" placeholder=""></textarea>
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 label-align">Trạng thái <span class="required">*</span></label>
+                      <div class="col-md-9 col-sm-9 ">
+                        <select name="project_post_status" class="form-control">
+                          <option value="1">Hiển thị Dịch Vụ</option>
+                          <option value="0">Ẩn Dịch Vụ</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="item form-group">
+                      <div class="col-md-9 col-sm-9 offset-md-3">
+                        <button class="btn btn-primary" type="reset">Hủy Dịch Vụ</button>
+                        <button type="submit" class="btn btn-success">Tạo Dịch Vụ</button>
+                      </div>
+                    </div>
+
+</form> 
+<%
+=end%>
+
+
+
+                  <%= form_for :news, method: :post, multipart: true do |f|%>
+        
+                  <form id="demo-form2" action="{{URL::TO('/save-posts-project')}}" enctype="multipart/form-data" data-parsley-validate class="form-horizontal form-label-left">
+                    
+                    <div class="item form-group">
+                      <label class="col-form-label col-md-3 col-sm-3 label-align" for="Name">Tên nội dung Dịch Vụ <span class="required">*</span>
+                      </label>
+                      <div class="col-md-9 col-sm-9 ">         
+                                              <%
+=begin%>
+ <input type="text" id="slug" onkeyup="ChangeToSlug()" name="project_post_title" required="required" class="form-control "> 
+<%
+=end%>
+               
+                        <%= f.text_field :title, class: 'form-control', onkeyup: 'ChangeToSlug()', id: 'slug'%>
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="col-form-label col-md-3 col-sm-3 label-align" for="slug">Slug <span class="required">*</span>
+                      </label>
+                      <div class="col-md-9 col-sm-9 ">
+                        <%
+=begin%>
+                        <input type="text" id="convert_slug" name="project_post_slug" required="required" class="form-control ">
+<%
+=end%>
+                        <%= f.text_field :slug, id:'convert_slug', autofocus: true, class: 'form-control', type: 'text' %>
+
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 label-align">Tóm tắt Dịch Vụ <span class="required">*</span>
+                      </label>
+                      <div class="col-md-9 col-sm-9 ">
+                        <%
+=begin%>
+ <textarea class="form-control" rows="3" name="project_post_desc" placeholder="" required=""></textarea> 
+<%
+=end%>
+
+                        <%= f.text_area :desc, id:'convert_slug', autofocus: true, class: 'form-control', type: 'text' %>
+
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 label-align" for="exampleInputImage1">Hình ảnh Dịch Vụ</label>
+                        <%
+=begin%>
+ <input type="file" name="project_post_img" class="form-control" id="exampleInputImage1" required="" style="border: none;"> 
+<%
+=end%>
+                        <%
+=begin%>
+ <%= f.file_field :img, class: 'form-control'%> 
+<%
+=end%>
+<%= f.text_field :img, value:'img' class: 'form-control'%>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 label-align">Nội dung Dịch Vụ <span class="required">*</span>
+                      </label>
+                      <div class="col-md-9 col-sm-9 ">
+                        <%= f.rich_text_area :content, class: 'form-control'%>
+                          
+                      
+
+
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="col-form-label col-md-3 col-sm-3 label-align" for="keyword">Meta từ khóa Dịch Vụ <span class="required">*</span>
+                      </label>
+                      <div class="col-md-9 col-sm-9 ">
+                        <%
+=begin%>
+ <input type="text" name="project_post_metakeyword" required="required" class="form-control "> 
+<%
+=end%>
+                        <%= f.text_field :metakeyword, class: 'form-control'%>
+                        
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 label-align">Meta nội dung Dịch Vụ <span class="required">*</span>
+                      </label>
+                      <div class="col-md-9 col-sm-9 ">
+                        <%
+=begin%>
+ <textarea class="form-control" rows="5" name="project_post_metadesc" required="" placeholder=""></textarea> 
+<%
+=end%>
+                        <%= f.text_area :metadesc, class: 'form-control', row:'5'%>
+
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 label-align">Trạng thái <span class="required">*</span></label>
+                      <div class="col-md-9 col-sm-9 ">
+                        <%
+=begin%>
+ <select name="project_post_status" class="form-control">
+                          <option value="1">Hiển thị Dịch Vụ</option>
+                          <option value="0">Ẩn Dịch Vụ</option>
+                        </select> 
+<%
+=end%>
+                    
+ <%= f.select :status, options_for_select(["Hiển thị Dịch Vụ", "Ẩn Dịch Vụ"]), :class => 'form-control' %> 
+
+
+                      </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="item form-group">
+                      <div class="col-md-9 col-sm-9 offset-md-3">
+                        <button class="btn btn-primary" type="reset">Hủy Dịch Vụ</button>
+                        <%
+=begin%>
+ <button type="submit" class="btn btn-success">Tạo Dịch Vụ</button> 
+<%
+=end%>
+                        <%= f.submit "Tạo Dịch Vụ", class: 'btn btn-success' %>
+                      </div>
+                    </div>
+                  </form>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            GreenService - <a href="https://colorlib.com">Dịch vụ vệ sinh & chăm sóc cây xanh Khánh Huy</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- FastClick -->
+    <script src="../testChuyende/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../testChuyende/nprogess.js"></script>
+    <!-- iCheck -->
+    <script src="../testChuyende/icheck.min.js"></script>
+    <script src="../testChuyende/bootstrap-progressbar.min.js"></script>
+    <script src="../testChuyende/jquery.smartWizard.js"></script>
+    <script src="../testChuyende/switchery.min.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../testChuyende/custom.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>>
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <script>
+                        CKEDITOR.replace( 'editor1' );
+                </script>
+
+    <script type="text/javascript">
+    function ChangeToSlug()
+        {
+            var slug;
+         
+            //Lấy text từ thẻ input title 
+            slug = document.getElementById("slug").value;
+            slug = slug.toLowerCase();
+            //Đổi ký tự có dấu thành không dấu
+                slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ|ä/gi, 'a');
+                slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+                slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+                slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ö|ợ/gi, 'o');
+                slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự|ü/gi, 'u');
+                slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+                slug = slug.replace(/đ/gi, 'd');
+
+                slug = slug.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ|Ä/gi, 'A');
+                slug = slug.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/gi, 'E');
+                slug = slug.replace(/Ì|Í|Ị|Ỉ|Ĩ/gi, 'I');
+                slug = slug.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ|Ö/gi, 'O');
+                slug = slug.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ|Ü/gi, 'U');
+                slug = slug.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/gi, 'Y');
+                slug = slug.replace(/Đ/gi, 'D');
+                //Xóa các ký tự đặt biệt
+                slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+                //Đổi khoảng trắng thành ký tự gạch ngang
+                slug = slug.replace(/ /gi, "-");
+                //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+                //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+                slug = slug.replace(/\-\-\-\-\-/gi, '-');
+                slug = slug.replace(/\-\-\-\-/gi, '-');
+                slug = slug.replace(/\-\-\-/gi, '-');
+                slug = slug.replace(/\-\-/gi, '-');
+                //Xóa các ký tự gạch ngang ở đầu và cuối
+                slug = '@' + slug + '@';
+                slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+                //In slug ra textbox có id “slug”
+            document.getElementById('convert_slug').value = slug;
+        }
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+  </body>
+</html>

@@ -1,0 +1,266 @@
+
+<% if notice %>
+    <%#>  <%= notice %>
+      <% flash.each do |type, msg| %>
+  <div class="alert alert-success d-flex justify-content-end" role="alert">
+    <%= msg %>
+  </div>
+<% end %>
+    <% end %>
+
+    <% if alert %>
+    <%#---> <%= alert %>
+    <% flash.each do |type, msg| %>
+  <div class="alert alert-danger d-flex justify-content-end" role="alert">
+    <%= msg %>
+  </div>
+<% end %>
+    <% end %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LoginApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+    /* .navigation{
+      background-color:red;
+      text-align:center;
+    } */
+    body {
+    font-family: "Lato", sans-serif;
+}
+
+.alert{
+    position: static;
+}
+
+.main-head{
+    height: 150px;
+    background: #FFF;
+
+}
+
+.sidenav {
+    height: 100%;
+    background-color: #000;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+    .fakeimg {
+        height: 200px;
+        background: #aaa;
+    }
+
+.main {
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+}
+
+@media screen and (max-width: 450px) {
+    .login-form{
+        margin-top: 10%;
+    }
+
+    .register-form{
+        margin-top: 5%;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .main{
+        margin-left: 40%;
+    }
+
+    .sidenav{
+        width: 40%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+
+    .login-form{
+        margin-top: 70%;
+    }
+
+    .register-form{
+        margin-top: 20%;
+    }
+}
+
+
+.login-main-text{
+    margin-top: 20%;
+    padding: 60px;
+    color: #fff;
+}
+
+.login-main-text h2{
+    font-weight: 300;
+}
+
+.btn-black{
+    background-color: #000 !important;
+    color: #fff;
+}
+    </style>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+<div class="top">
+		<ul>
+			<li>
+				<i class="fas fa-phone"></i>
+				<p>0935153292-0935153292</p>
+			</li>
+			<li>
+				<i class="fas fa-envelope"></i>
+				<p>ngocmtqn@gmail.com</p>
+			</li>
+			<li>
+				<i class="far fa-clock"></i>
+				<p>Mon - Fri: 9:00 AM - 5:00 PM</p>
+			</li>
+		</ul>
+	</div>
+	<div class="menu">
+		<div class="menu-logo">
+			<a href="<%=root_path%>"><img src="/logo.jpeg"></a>
+		</div>
+		<div class="menu-name">
+			<div class="menu-name-1">
+				<p>Công ty</p>
+			</div>
+			<div class="menu-name-2">
+				<h3>Khánh Huy</h3>
+			</div>
+		</div>
+		<div class="menu-tags">
+			<ul>
+				<li class="home"><a href="/">Trang chủ</a></li>
+				<li class="cool-link">
+					<a style="cursor: pointer;">Giới thiệu</a>
+					<ul class="nav-sub">
+						<li>
+							<a href="{{URL::TO('/gioi-thieu">Giới thiệu chung</a>
+						</li>
+						<li>
+							<a href="{{URL::TO('/kinh-nghiem-nang-luc">Kinh nghiệm năng lực</a>
+						</li>
+					</ul>
+				</li>
+				<li class="cool-link"><a href="/dich-vu">Dịch Vụ</a></li>
+				<li class="cool-link"><a href="{{URL::TO('/home#Project">Dự án thực hiện</a></li>
+				<li class="cool-link"><a href="/tin-tuc">Tin tức</a></li>
+				<li class="cool-link"><a href="{{URL::TO('/lien-he">Liên hệ</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		$(window).scroll(function() {
+			if($(window).scrollTop() > $(window).height() - 200) {
+				$('.menu').addClass('fixed');
+				//document.getElementById('imgscrhd').style.display = 'block';
+			} else {
+				$('.menu').removeClass('fixed');
+				//document.getElementById('imgscrhd').style.display = 'none';
+			}
+		});	
+	</script>
+
+	<div class="menu-moblie-hd">
+		<div class="burger-container">
+		<div id="burger">
+			<div class="bar topBar"></div>
+			<div class="bar btmBar"></div>
+		</div>
+	</div>
+
+	<div class="img-header">
+		<img src="/front-end/Images/home/logo.jpeg">
+	</div>
+
+	<div class="header">		
+		<ul class="menu-moblie">
+			<li class="menu-item"><a href="{{URL::TO('/home">Trang chủ</a></li>
+			<li class="menu-item"><a href="{{URL::TO('/gioi-thieu">Giới thiệu</a></li>
+			<li class="menu-item"><a href="#">Dịch vụ cây xanh</a></li>
+			<li class="menu-item"><a href="{{URL::TO('/home#Project">Dự án thực hiện</a></li>
+			<li class="menu-item"><a href="/tin-tuc">Tin tức</a></li>
+			<li class="menu-item"><a href="{{URL::TO('/lien-he">Liên hệ</a></li>
+		</ul>
+	</div>
+	</div>
+
+	<script type="text/javascript">
+		(function(){
+			var burger = document.querySelector('.burger-container'),
+			header = document.querySelector('.header');
+
+			sls = document.querySelector('.slide-show');
+
+			burger.onclick = function() {
+				header.classList.toggle('menu-opened');
+			}
+		}());
+	</script>
+
+	<section>
+		<%= yield %>
+	</section>
+	<div class="footer">
+		<div class="ft-block ft-block-1">
+			<div class="title-ft-block">
+				<h3>Công ty TNHH Khánh Huy</h3>
+			</div>
+			<div class="content-ft-block">
+				<p>Công ty TNHH Dịch vụ vệ sinh và Chăm sóc Khánh Huy là một công ty chuyên ngành về dịch vụ vệ sinh công nghiệp; trồng và duy trì cảnh quang,..Được thành lập theo giấy phép số 4001168316 của Sở Kế hoạch và Đầu tư Quảng Nam, trong các lĩnh vực vệ sinh công nghiệp; Dịch vụ chăm sóc và duy trì cảnh quang, tư vấn trong lĩnh vực môi trường,...</p>
+			</div>
+		</div>
+		<div class="ft-block ft-block-2">
+			<div class="title-ft-block">
+				<h3>Dịch Vụ</h3>
+			</div>
+			<div class="content-ft-block">
+				<ul>
+					<li>
+						<p>Tất cả dịch vụ</p>
+					</li>
+					<li>
+						<p>- Thiết kế, thi công cảnh quan cây xanh, hệ thống tưới tự động</p>
+					</li>
+					<li>
+						<p>- Chăm sóc, bảo dưỡng cảnh quan cây xanh, hệ thống tưới tự động</p>
+					</li>
+					<li>
+						<p>- Bán và cho thuê cây nội thất</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<% content_for :not_authorized do %>
+  alert('You are not authorized to do that!')
+<% end %>
+  </body>
+<script>
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove();
+        });
+    }, 1000);
+</script>
+</html>
